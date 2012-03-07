@@ -1,6 +1,8 @@
+require 'bundler/setup'
 require 'bundler/gem_tasks'
 require 'rspec/core/rake_task'
 require 'appraisal'
+require 'fileutils'
 
 task :default => :spec
 
@@ -32,8 +34,9 @@ namespace :db do
 
     %x( echo "#{sql}" | mysql -u "#{mysql_user}" )
 
-    %x( dropdb -U #{postgres_user} octopus_shard_1 )
-    %x( rm -f /tmp/database.sqlite3 )
+    %x( dropdb -U #{postgres_user} octopus_shard_1 ) rescue nil
+
+    FileUtils.rm("/tmp/database.sqlite3") rescue nil
   end
 
   desc 'Create tables on tests databases'

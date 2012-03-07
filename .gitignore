@@ -3,7 +3,6 @@
 .bundle
 .rvmrc
 Gemfile.lock
-gemfiles/*
 pkg/*
 *.rbc
 tmp/*
